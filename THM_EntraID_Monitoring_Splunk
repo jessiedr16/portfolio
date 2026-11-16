@@ -14,13 +14,13 @@ index="task-2" sourcetype="azure:aad:signin" "status.errorCode"!=0 conditionalAc
 
 #Listing successful logins by user, targeting user and user IP found in failed login logins
 index="task-2" sourcetype="azure:aad:signin" "status.errorCode"=0
-| where userPrincipalName="<TARGET_USER>"
+| where userPrincipalName=amanda.costa@finegalo.thm
 | stats count by userPrincipalName, status.errorCode, ipAddress
 | sort status.errorCode
 
 index="task-2" sourcetype="azure:aad:signin" "status.errorCode"=0
-| where ipAddress="<SUSPICIOUS_IP>"
+| where ipAddress=94.20.222.248
 | stats count by userPrincipalName, status.errorCode
 | sort status.errorCode
 
-#detected both password spraying and throttling brute force based attacks on EntraID by analyzing high volumes of failed sign-ins from single username and single IP address
+#detected both password spraying and throttling brute force based attacks on EntraID by analyzing high volumes of failed sign-ins from username and IP address
